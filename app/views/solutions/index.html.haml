@@ -14,7 +14,9 @@
       %td= solution.created_at
       %td= link_to solution.problem.name, [solution.problem.challenge, solution.problem]
       %td= solution.language
-      %td= link_to solution.status, solution
+      %td
+        = solution_status_display solution.status
+        = link_to solution.status, solution
       %td= link_to 'Edit', edit_solution_path(solution)
       %td= link_to 'Destroy', solution, :method => :delete, :data => { :confirm => 'Are you sure?' }
 

@@ -24,16 +24,20 @@
 - if user_signed_in?
   %h3 Solutions
 
-  - solutions = @problem.solutions.by_user(current_user).order('id desc')
+  - solutions = @problem.solutions.order('id desc')
   - unless solutions.empty?
     %table
       %tr
         %th Created At
+        %th User
         %th Status
   
       - solutions.each do |solution|
         %tr
           %td= solution.created_at
-          %td= link_to solution.status, solution
+          %td= solution.user.email
+          %td
+            = solution_status_display solution.status
+            = link_to solution.status, solution
   
   = link_to 'New Solution', new_solution_path(problem_id: @problem.id)
