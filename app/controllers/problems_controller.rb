@@ -1,47 +1,39 @@
 class ProblemsController < ApplicationController
   before_filter :get_challenge
-  # GET /problems
-  # GET /problems.json
+
   def index
-    @problems = @challenge.problems
+    @problems = @challenge.problems.order('id asc')
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html
       format.json { render json: @problems }
     end
   end
 
-  # GET /problems/1
-  # GET /problems/1.json
   def show
     @problem = @challenge.problems.find(params[:id])
 
     respond_to do |format|
-      format.html # show.html.erb
+      format.html
       format.json { render json: @problem }
     end
   end
 
-  # GET /problems/new
-  # GET /problems/new.json
   def new
-    @problem = @challenge.problems.new
+    @problem = @challenge.where(user: current_user).problems.new
 
     respond_to do |format|
-      format.html # new.html.erb
+      format.html
       format.json { render json: @problem }
     end
   end
 
-  # GET /problems/1/edit
   def edit
-    @problem = @challenge.problems.find(params[:id])
+    @problem = @challenge.where(user: current_user).problems.find(params[:id])
   end
 
-  # POST /problems
-  # POST /problems.json
   def create
-    @problem = @challenge.problems.new(params[:problem])
+    @problem = @challenge.where(user: current_user).problems.new(params[:problem])
 
     respond_to do |format|
       if @problem.save
@@ -54,14 +46,12 @@ class ProblemsController < ApplicationController
     end
   end
 
-  # PUT /problems/1
-  # PUT /problems/1.json
   def update
-    @problem = @challenge.problems.find(params[:id])
+    @problem = @challenge.where(user: current_user).problems.find(params[:id])
 
     respond_to do |format|
       if @problem.update_attributes(params[:problem])
-        format.html { redirect_to @problem, notice: 'Problem was successfully updated.' }
+        format.html { redirect_to [@challenge, @problem], notice: 'Problem was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -70,10 +60,8 @@ class ProblemsController < ApplicationController
     end
   end
 
-  # DELETE /problems/1
-  # DELETE /problems/1.json
   def destroy
-    @problem = @challenge.problems.find(params[:id])
+    @problem = @challenge.where(user: current_user).problems.find(params[:id])
     @problem.destroy
 
     respond_to do |format|

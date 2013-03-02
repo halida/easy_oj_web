@@ -2,6 +2,6 @@
 
 = render 'form'
 
-= link_to 'Show', @problem
+= link_to 'Show', [@challenge, @problem]
 \|
-= link_to 'Back', problems_path
+= link_to 'Back', challenge_path(@challenge)

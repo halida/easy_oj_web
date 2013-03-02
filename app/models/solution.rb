@@ -4,10 +4,14 @@ class Solution < ActiveRecord::Base
 
   scope :by_user, lambda{ |user| where(user_id: user.id)}
 
+  LANGUAGES = ['C', 'Java', 'Python']
+
+  validates :language, inclusion: LANGUAGES
+
   def self.tester_get
     solution = Solution.where(status: nil).first
     return solution unless solution
-    # solution.update_attributes(status: 'testing')
+    solution.update_attributes(status: 'testing')
     solution
   end
 

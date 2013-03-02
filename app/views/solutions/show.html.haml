@@ -1,24 +1,23 @@
-%p#notice= notice
+%p
+  User: #{@solution.user.email}
 
 %p
-  %b User:
-  = @solution.user_id
-%p
   %b Problem:
-  = @solution.problem_id
-%p
-  %b Code:
-  = @solution.code
-%p
+  = link_to @solution.problem.name, [@solution.problem.challenge, @solution.problem]
   %b Language:
   = @solution.language
+
 %p
   %b Status:
   = @solution.status
-%p
   %b Result:
   = @solution.result
 
-= link_to 'Edit', edit_solution_path(@solution)
-\|
+%p
+  %b Code:
+  %pre= @solution.code
+
+- if @solution.user = current_user
+  = link_to 'Edit', edit_solution_path(@solution)
+  \|
 = link_to 'Back', solutions_path

@@ -24,16 +24,14 @@ class SolutionsController < ApplicationController
   end
 
   def index
-    @solutions = Solution.all
+    @solutions = current_user.solutions.order('id desc')
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html
       format.json { render json: @solutions }
     end
   end
 
-  # GET /solutions/1
-  # GET /solutions/1.json
   def show
     @solution = Solution.find(params[:id])
 
@@ -43,8 +41,6 @@ class SolutionsController < ApplicationController
     end
   end
 
-  # GET /solutions/new
-  # GET /solutions/new.json
   def new
     @solution = Solution.new
 
@@ -54,20 +50,17 @@ class SolutionsController < ApplicationController
     end
   end
 
-  # GET /solutions/1/edit
   def edit
     @solution = Solution.find(params[:id])
   end
 
-  # POST /solutions
-  # POST /solutions.json
   def create
     @problem = Problem.find params[:solution][:problem_id]
     @solution = @problem.solutions.by_user(current_user).new(params[:solution].slice(:code, :language))
 
     respond_to do |format|
       if @solution.save
-        format.html { redirect_to @solution, notice: 'Solution was successfully created.' }
+        format.html { redirect_to solutions_path, notice: 'Solution was successfully created.' }
         format.json { render json: @solution, status: :created, location: @solution }
       else
         format.html { render action: "new" }
@@ -76,8 +69,6 @@ class SolutionsController < ApplicationController
     end
   end
 
-  # PUT /solutions/1
-  # PUT /solutions/1.json
   def update
     @solution = Solution.find(params[:id])
 
@@ -92,8 +83,6 @@ class SolutionsController < ApplicationController
     end
   end
 
-  # DELETE /solutions/1
-  # DELETE /solutions/1.json
   def destroy
     @solution = Solution.find(params[:id])
     @solution.destroy

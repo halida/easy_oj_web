@@ -1,4 +1,4 @@
-%h1 Listing challenges
+%h1 Challenges
 
 %table
   %tr
@@ -14,11 +14,16 @@
     %tr
       %td= challenge.name
       %td= challenge.desc
-      %td= challenge.user_id
+      %td= challenge.user.email
       %td= challenge.level
-      %td= link_to 'Show', challenge
-      %td= link_to 'Edit', edit_challenge_path(challenge)
-      %td= link_to 'Destroy', challenge, :method => :delete, :data => { :confirm => 'Are you sure?' }
+      - if challenge.user == current_user
+        %td= link_to 'Show', challenge
+        %td= link_to 'Edit', edit_challenge_path(challenge)
+        %td= link_to 'Destroy', challenge, :method => :delete, :data => { :confirm => 'Are you sure?' }
+      - else
+        %td
+        %td
+        %td
 
 %br
 

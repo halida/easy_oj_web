@@ -1,43 +1,39 @@
-%p#notice= notice
+- admin = (@problem.user == current_user)
 
+%h1= @problem.name
+  
 %p
-  %b Name:
-  = @problem.name
-%p
-  %b Desc:
-  = @problem.desc
-%p
-  %b User:
-  = @problem.user_id
-%p
-  %b Show error:
-  = @problem.show_error
+  By User: #{@challenge.user.email}
+  Show error: #{@problem.show_error ? 'Yes' : 'No'}
+
+%p= @problem.desc
+
 %p
   %b Demo input:
-  = @problem.demo_input
+  %pre= @problem.demo_input
 %p
   %b Demo output:
-  = @problem.demo_output
-%p
-  %b Input:
-  = @problem.input
-%p
-  %b Output:
-  = @problem.output
+  %pre= @problem.demo_output
 
-= link_to 'Edit', edit_problem_path(@problem)
-\|
-= link_to 'Back', problems_path
+%p
+  - if admin
+    = link_to 'Edit', edit_challenge_problem_path(@challenge, @problem)
+    \|
+  = link_to 'Back', challenge_path(@challenge)
 
 - if user_signed_in?
   %h3 Status
 
-  %table
-    %tr
-      %th Status
-
-  - @problem.solutions.by_user(current_user).each do |solution|
-    %tr
-      %td= solution.status
-
+  - solutions = @problem.solutions.by_user(current_user).order('id desc')
+  - unless solutions.empty?
+    %table
+      %tr
+        %th Created At
+        %th Status
+  
+      - solutions.each do |solution|
+        %tr
+          %td= solution.created_at
+          %td= solution.status
+  
   = link_to 'New Solution', new_solution_path(problem_id: @problem.id)

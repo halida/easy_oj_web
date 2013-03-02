@@ -1,21 +1,18 @@
-%p#notice= notice
+- admin = (@challenge.user == current_user)
+
+%h1= @challenge.name
 
 %p
-  %b Name:
-  = @challenge.name
-%p
-  %b Desc:
-  = @challenge.desc
-%p
-  %b User:
-  = @challenge.user_id
-%p
-  %b Level:
-  = @challenge.level
+  By User: #{@challenge.user.email}
+  Level: #{@challenge.level}
 
-= link_to 'Edit', edit_challenge_path(@challenge)
-\|
-= link_to 'Back', challenges_path
+%p= @challenge.desc
+
+%p
+  - if admin
+    = link_to 'Edit', edit_challenge_path(@challenge)
+    \|
+  = link_to 'Back', challenges_path
 
 %h2 Problems
 
@@ -25,8 +22,9 @@
     %th Desc
     %th Show error
     %th
-    %th
-    %th
+    - if admin
+      %th
+      %th
 
   - @challenge.problems.each do |problem|
     %tr
@@ -34,11 +32,12 @@
       %td= problem.desc
       %td= problem.show_error
       %td= link_to 'Show', [@challenge, problem]
-      %td= link_to 'Edit', edit_problem_path(problem)
-      %td= link_to 'Destroy', problem, :method => :delete, :data => { :confirm => 'Are you sure?' }
+      - if admin
+        %td= link_to 'Edit', edit_challenge_problem_path(@challenge, problem)
+        %td= link_to 'Destroy', [@challenge, problem], :method => :delete, :data => { :confirm => 'Are you sure?' }
 
 %br
 
-= link_to 'New Problem', new_challenge_problem_path(@challenge.id)
+= link_to 'New Problem', new_challenge_problem_path(@challenge.id) if admin
 
 

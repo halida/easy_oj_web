@@ -12,6 +12,6 @@
     = f.text_area :code
   .field
     = f.label :language
-    = f.text_field :language
+    = f.select :language, Solution::LANGUAGES
   .actions
     = f.submit 'Post'
