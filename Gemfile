@@ -51,3 +51,8 @@ gem 'jquery-rails'
 
 # To use debugger
 # gem 'debugger'
+group :development, :test do
+  gem 'unicorn'
+  gem 'rspec'
+  gem 'rspec-rails', "~> 2.6"
+end
