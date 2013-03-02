@@ -1,6 +1,28 @@
 class SolutionsController < ApplicationController
-  # GET /solutions
-  # GET /solutions.json
+
+  def tester_get
+    @solution = Solution.tester_get
+    return render json: {} unless @solution
+
+    problem = @solution.problem
+    data = {
+      code: @solution.code,
+      language: @solution.language,
+      input: problem.input,
+      output: problem.output,
+      solution_token: @solution.token,
+      time_limit: 3,
+      memory_limit: 2000,
+    }
+    render json: data
+  end
+
+  def tester_set
+    @solution = Solution.find_by_token(params[:solution_token])
+    @solution.update_attributes(status: params[:status], result: params[:result])
+    render json: {result: 'OK'}
+  end
+
   def index
     @solutions = Solution.all
 
@@ -41,7 +63,7 @@ class SolutionsController < ApplicationController
   # POST /solutions.json
   def create
     @problem = Problem.find params[:solution][:problem_id]
-    @solution = @problem.solutions.by_user(current_user).new(params[:solution].slice(:text, :language))
+    @solution = @problem.solutions.by_user(current_user).new(params[:solution].slice(:code, :language))
 
     respond_to do |format|
       if @solution.save

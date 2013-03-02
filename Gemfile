@@ -29,6 +29,7 @@ gem 'redcarpet', '1.17.2'
 gem 'will_paginate', '~> 3.0.pre2'
 gem 'settingslogic'
 gem 'cache_digests'
+gem 'jbuilder'
 
 gem 'resque'
 

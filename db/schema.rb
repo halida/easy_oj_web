@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130302032700) do
+ActiveRecord::Schema.define(:version => 20130302050206) do
 
   create_table "challenges", :force => true do |t|
     t.string   "name"
@@ -39,7 +39,7 @@ ActiveRecord::Schema.define(:version => 20130302032700) do
   create_table "solutions", :force => true do |t|
     t.integer  "user_id"
     t.integer  "problem_id"
-    t.text     "text"
+    t.text     "code"
     t.string   "language"
     t.string   "token"
     t.string   "status"

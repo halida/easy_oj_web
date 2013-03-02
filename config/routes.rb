@@ -3,6 +3,9 @@ EasyOjWeb::Application.routes.draw do
   root :to => 'challenges#index'
 
   resources :solutions do
+    collection do
+      post :tester_get, :tester_set
+    end
   end
 
   resources :challenges do
