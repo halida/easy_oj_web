@@ -1,4 +1,5 @@
 = form_for @solution do |f|
+  = f.hidden_field :problem_id, value: params[:problem_id]
   - if @solution.errors.any?
     #error_explanation
       %h2= "#{pluralize(@solution.errors.count, "error")} prohibited this solution from being saved:"
@@ -7,25 +8,10 @@
           %li= msg
 
   .field
-    = f.label :user_id
-    = f.number_field :user_id
-  .field
-    = f.label :problem_id
-    = f.number_field :problem_id
-  .field
     = f.label :text
     = f.text_area :text
   .field
     = f.label :language
     = f.text_field :language
-  .field
-    = f.label :token
-    = f.text_field :token
-  .field
-    = f.label :status
-    = f.text_field :status
-  .field
-    = f.label :result
-    = f.text_area :result
   .actions
-    = f.submit 'Save'
+    = f.submit 'Post'

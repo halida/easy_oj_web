@@ -28,3 +28,16 @@
 = link_to 'Edit', edit_problem_path(@problem)
 \|
 = link_to 'Back', problems_path
+
+- if user_signed_in?
+  %h3 Status
+
+  %table
+    %tr
+      %th Status
+
+  - @problem.solutions.by_user(current_user).each do |solution|
+    %tr
+      %td= solution.status
+
+  = link_to 'New Solution', new_solution_path(problem_id: @problem.id)

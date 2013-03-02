@@ -33,7 +33,7 @@
       %td= problem.name
       %td= problem.desc
       %td= problem.show_error
-      %td= link_to 'Show', problem
+      %td= link_to 'Show', [@challenge, problem]
       %td= link_to 'Edit', edit_problem_path(problem)
       %td= link_to 'Destroy', problem, :method => :delete, :data => { :confirm => 'Are you sure?' }
 

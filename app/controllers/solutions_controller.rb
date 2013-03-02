@@ -40,7 +40,8 @@ class SolutionsController < ApplicationController
   # POST /solutions
   # POST /solutions.json
   def create
-    @solution = Solution.new(params[:solution])
+    @problem = Problem.find params[:solution][:problem_id]
+    @solution = @problem.solutions.by_user(current_user).new(params[:solution].slice(:text, :language))
 
     respond_to do |format|
       if @solution.save
