@@ -16,3 +16,29 @@
 = link_to 'Edit', edit_challenge_path(@challenge)
 \|
 = link_to 'Back', challenges_path
+
+%h2 Problems
+
+%table
+  %tr
+    %th Name
+    %th Desc
+    %th Show error
+    %th
+    %th
+    %th
+
+  - @challenge.problems.each do |problem|
+    %tr
+      %td= problem.name
+      %td= problem.desc
+      %td= problem.show_error
+      %td= link_to 'Show', problem
+      %td= link_to 'Edit', edit_problem_path(problem)
+      %td= link_to 'Destroy', problem, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Problem', new_challenge_problem_path(@challenge.id)
+
+

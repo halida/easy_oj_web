@@ -1,4 +1,4 @@
-= form_for @problem do |f|
+= form_for [@challenge, @problem] do |f|
   - if @problem.errors.any?
     #error_explanation
       %h2= "#{pluralize(@problem.errors.count, "error")} prohibited this problem from being saved:"
