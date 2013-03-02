@@ -1,0 +1,35 @@
+@import "base"
+
+form.formtastic
+  fieldset
+    border: none
+    padding: 0
+    margin: 0
+    > ol
+      list-style: none
+      padding: 0
+      margin: 0
+      > li > label
+        display: block
+        clear: both
+        margin: 0
+    input[type=text], textarea
+      width: 300px
+
+    textarea
+      height: 100px
+
+    input[type=number]
+      width: 50px
+
+  fieldset.actions
+    margin: 10px 0 10px
+    input[type=submit]
+      font-size: 20px
+      border: none
+      padding: 4px 10px
+      border-radius: 4px
+      &:hover
+        color: $main_color
+        cursor: pointer
+

@@ -20,7 +20,7 @@ class ProblemsController < ApplicationController
   end
 
   def new
-    @problem = @challenge.where(user: current_user).problems.new
+    @problem = @challenge.problems.new
 
     respond_to do |format|
       format.html
@@ -29,11 +29,11 @@ class ProblemsController < ApplicationController
   end
 
   def edit
-    @problem = @challenge.where(user: current_user).problems.find(params[:id])
+    @problem = @challenge.problems.find(params[:id])
   end
 
   def create
-    @problem = @challenge.where(user: current_user).problems.new(params[:problem])
+    @problem = @challenge.problems.new(postparams)
 
     respond_to do |format|
       if @problem.save
@@ -74,5 +74,9 @@ class ProblemsController < ApplicationController
 
   def get_challenge
     @challenge = Challenge.find(params[:challenge_id])
+  end
+
+  def postparams
+    params[:problem]
   end
 end

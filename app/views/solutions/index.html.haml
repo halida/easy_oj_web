@@ -8,18 +8,13 @@
     %th Status
     %th
     %th
-    %th
 
   - @solutions.each do |solution|
     %tr
       %td= solution.created_at
       %td= solution.problem.name
       %td= solution.language
-      %td= solution.status
-      %td= link_to 'Show', solution
+      %td= link_to solution.status, solution
       %td= link_to 'Edit', edit_solution_path(solution)
       %td= link_to 'Destroy', solution, :method => :delete, :data => { :confirm => 'Are you sure?' }
 
-%br
-
-= link_to 'New Solution', new_solution_path

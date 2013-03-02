@@ -9,7 +9,8 @@ class Solution < ActiveRecord::Base
   validates :language, inclusion: LANGUAGES
 
   def self.tester_get
-    solution = Solution.where(status: nil).first
+    # solution = Solution.where(status: nil).first
+    return solution = Solution.find(8)
     return solution unless solution
     solution.update_attributes(status: 'testing')
     solution

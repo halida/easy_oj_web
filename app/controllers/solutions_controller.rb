@@ -19,7 +19,7 @@ class SolutionsController < ApplicationController
 
   def tester_set
     @solution = Solution.find_by_token(params[:solution_token])
-    @solution.update_attributes(status: params[:status], result: params[:result])
+    # @solution.update_attributes(status: params[:status], result: params[:result])
     render json: {result: 'OK'}
   end
 

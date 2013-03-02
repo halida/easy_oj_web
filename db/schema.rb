@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130302054941) do
+ActiveRecord::Schema.define(:version => 20130302072803) do
 
   create_table "challenges", :force => true do |t|
     t.string   "name"
@@ -24,7 +24,7 @@ ActiveRecord::Schema.define(:version => 20130302054941) do
 
   create_table "problems", :force => true do |t|
     t.string   "name"
-    t.string   "desc"
+    t.text     "desc"
     t.integer  "user_id"
     t.boolean  "show_error"
     t.text     "demo_input"

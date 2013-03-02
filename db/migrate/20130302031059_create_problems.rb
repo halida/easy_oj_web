@@ -2,7 +2,7 @@ class CreateProblems < ActiveRecord::Migration
   def change
     create_table :problems do |t|
       t.string :name
-      t.string :desc
+      t.text :desc
       t.integer :user_id
       t.boolean :show_error
       t.text :demo_input
