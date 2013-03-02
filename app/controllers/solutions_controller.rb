@@ -25,7 +25,7 @@ class SolutionsController < ApplicationController
 
   def all
     @all = true
-    @solutions = Solution.order('id desc')
+    @solutions = Solution.order('id desc').paginate(page: (params[:page] || 1))
     render "index"
   end
 
@@ -38,7 +38,7 @@ class SolutionsController < ApplicationController
 
   def index
     @all = false
-    @solutions = current_user.solutions.order('id desc')
+    @solutions = current_user.solutions.order('id desc').paginate(page: (params[:page] || 1))
 
     respond_to do |format|
       format.html
@@ -57,6 +57,7 @@ class SolutionsController < ApplicationController
 
   def new
     @solution = Solution.new
+    @solution.language = 'Python'
 
     respond_to do |format|
       format.html # new.html.erb

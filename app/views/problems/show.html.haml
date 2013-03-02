@@ -1,4 +1,4 @@
-- admin = (@problem.user == current_user)
+- admin = (@problem.user_id == current_user.id)
 
 %h1= @problem.name
   
@@ -6,7 +6,7 @@
   By User: #{@challenge.user.email}
   Show error: #{@problem.show_error ? 'Yes' : 'No'}
 
-= md_article @problem.desc
+.md= md_article @problem.desc
 
 %p
   %b Demo input:
@@ -23,8 +23,11 @@
 
 - if user_signed_in?
   %h3 Solutions
+  %p= link_to 'New Solution', new_solution_path(problem_id: @problem.id)
 
-  - solutions = @problem.solutions.order('id desc')
+  - solutions = @problem.solutions.order('id desc').paginate(page: (params[:page] || 1))
+  = will_paginate solutions
+
   - unless solutions.empty?
     %table
       %tr
@@ -41,5 +44,3 @@
           %td
             = solution_status_display solution.status
             = link_to solution.status, solution
-  
-  = link_to 'New Solution', new_solution_path(problem_id: @problem.id)

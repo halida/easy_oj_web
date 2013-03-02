@@ -34,6 +34,7 @@ class ProblemsController < ApplicationController
 
   def create
     @problem = @challenge.problems.new(postparams)
+    @problem.user = current_user
 
     respond_to do |format|
       if @problem.save
@@ -65,7 +66,7 @@ class ProblemsController < ApplicationController
     @problem.destroy
 
     respond_to do |format|
-      format.html { redirect_to problems_url }
+      format.html { redirect_to @challenge }
       format.json { head :no_content }
     end
   end
