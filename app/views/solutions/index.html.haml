@@ -2,6 +2,8 @@
 
 %table
   %tr
+    - if @all
+      %th User
     %th Created At
     %th Problem
     %th Language
@@ -11,6 +13,8 @@
 
   - @solutions.each do |solution|
     %tr
+      - if @all
+        %td= solution.user.email
       %td= solution.created_at
       %td= link_to solution.problem.name, [solution.problem.challenge, solution.problem]
       %td= solution.language

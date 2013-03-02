@@ -47,7 +47,7 @@ class ProblemsController < ApplicationController
   end
 
   def update
-    @problem = @challenge.where(user: current_user).problems.find(params[:id])
+    @problem = @challenge.problems.find(params[:id])
 
     respond_to do |format|
       if @problem.update_attributes(params[:problem])
@@ -61,7 +61,7 @@ class ProblemsController < ApplicationController
   end
 
   def destroy
-    @problem = @challenge.where(user: current_user).problems.find(params[:id])
+    @problem = @challenge.problems.find(params[:id])
     @problem.destroy
 
     respond_to do |format|

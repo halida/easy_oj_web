@@ -5,6 +5,7 @@ EasyOjWeb::Application.routes.draw do
   resources :solutions do
     collection do
       post :tester_get, :tester_set
+      get :all
     end
   end
 

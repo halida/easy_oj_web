@@ -23,7 +23,14 @@ class SolutionsController < ApplicationController
     render json: {result: 'OK'}
   end
 
+  def all
+    @all = true
+    @solutions = Solution.order('id desc')
+    render "index"
+  end
+
   def index
+    @all = false
     @solutions = current_user.solutions.order('id desc')
 
     respond_to do |format|

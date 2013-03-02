@@ -3,10 +3,10 @@
 %h1= @challenge.name
 
 %p
-  By User: #{@challenge.user.email}
+  By Author: #{@challenge.user.email}
   Level: #{@challenge.level}
 
-%p= @challenge.desc
+= md_article @challenge.desc
 
 %p
   - if admin

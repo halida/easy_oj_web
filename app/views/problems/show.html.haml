@@ -6,7 +6,7 @@
   By User: #{@challenge.user.email}
   Show error: #{@problem.show_error ? 'Yes' : 'No'}
 
-%p= @problem.desc
+= md_article @problem.desc
 
 %p
   %b Demo input:
