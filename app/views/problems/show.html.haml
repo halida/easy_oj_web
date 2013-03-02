@@ -22,7 +22,7 @@
   = link_to 'Back', challenge_path(@challenge)
 
 - if user_signed_in?
-  %h3 Status
+  %h3 Solutions
 
   - solutions = @problem.solutions.by_user(current_user).order('id desc')
   - unless solutions.empty?
@@ -34,6 +34,6 @@
       - solutions.each do |solution|
         %tr
           %td= solution.created_at
-          %td= solution.status
+          %td= link_to solution.status, solution
   
   = link_to 'New Solution', new_solution_path(problem_id: @problem.id)

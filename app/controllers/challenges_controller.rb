@@ -28,7 +28,7 @@ class ChallengesController < ApplicationController
   end
 
   def edit
-    @challenge = current_user.challenge.find(params[:id])
+    @challenge = current_user.challenges.find(params[:id])
   end
 
   def create

@@ -69,20 +69,6 @@ class SolutionsController < ApplicationController
     end
   end
 
-  def update
-    @solution = Solution.find(params[:id])
-
-    respond_to do |format|
-      if @solution.update_attributes(params[:solution])
-        format.html { redirect_to @solution, notice: 'Solution was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @solution.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
   def destroy
     @solution = Solution.find(params[:id])
     @solution.destroy

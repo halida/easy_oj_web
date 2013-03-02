@@ -20,6 +20,10 @@ class Solution < ActiveRecord::Base
     self[:token]
   end
 
+  def status
+    self[:status] || "Pending"
+  end
+
   private
   def generate_token
     self[:token] = ::SecureRandom.hex(6)

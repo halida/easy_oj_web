@@ -2,6 +2,7 @@
 
 %table
   %tr
+    %th Created At
     %th Problem
     %th Language
     %th Status
@@ -11,6 +12,7 @@
 
   - @solutions.each do |solution|
     %tr
+      %td= solution.created_at
       %td= solution.problem.name
       %td= solution.language
       %td= solution.status
