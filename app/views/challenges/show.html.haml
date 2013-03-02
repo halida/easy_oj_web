@@ -21,7 +21,6 @@
     %th ID
     %th Name
     %th Desc
-    %th Show error
     - if admin
       %th
       %th
@@ -30,8 +29,7 @@
     %tr
       %td.middle= problem.id
       %td= link_to problem.name, [@challenge, problem]
-      %td= problem.desc
-      %td= problem.show_error
+      %td= truncate problem.desc, length: 40
       - if admin
         %td= link_to 'Edit', edit_challenge_problem_path(@challenge, problem)
         %td= link_to 'Destroy', [@challenge, problem], :method => :delete, :data => { :confirm => 'Are you sure?' }

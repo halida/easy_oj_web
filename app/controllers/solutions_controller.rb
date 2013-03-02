@@ -29,6 +29,13 @@ class SolutionsController < ApplicationController
     render "index"
   end
 
+  def ladder
+    raw = Solution.where(status: "Accepted").map{|s| [s.user_id, s.problem_id]}.uniq
+    result = Hash.new 0
+    raw.each{|r| result[r[0]] += 1}
+    @result = result.to_a.map{|user_id, count| [User.find(user_id), count, 0]}
+  end
+
   def index
     @all = false
     @solutions = current_user.solutions.order('id desc')

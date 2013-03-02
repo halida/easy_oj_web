@@ -1,0 +1,12 @@
+%h1 Ladder
+
+%table
+  %tr
+    %th User
+    %th Problem Solved
+
+  - @result.each do |user, count, all_count|
+    %tr
+      %td= user.email
+      %td= count
+
