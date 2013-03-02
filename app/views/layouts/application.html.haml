@@ -8,6 +8,8 @@
     = csrf_meta_tags
 
 %body
-  = render partial: "layouts/nav"
-  %p#notice= notice
-  = yield
+  .body_top
+  .wrapper
+    = render partial: "layouts/nav"
+    %p#notice= notice
+    = yield
