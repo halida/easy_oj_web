@@ -1,0 +1,22 @@
+= form_for @challenge do |f|
+  - if @challenge.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@challenge.errors.count, "error")} prohibited this challenge from being saved:"
+      %ul
+        - @challenge.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.label :name
+    = f.text_field :name
+  .field
+    = f.label :desc
+    = f.text_field :desc
+  .field
+    = f.label :user_id
+    = f.number_field :user_id
+  .field
+    = f.label :level
+    = f.number_field :level
+  .actions
+    = f.submit 'Save'

@@ -1,0 +1,30 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @problem.name
+%p
+  %b Desc:
+  = @problem.desc
+%p
+  %b User:
+  = @problem.user_id
+%p
+  %b Show error:
+  = @problem.show_error
+%p
+  %b Demo input:
+  = @problem.demo_input
+%p
+  %b Demo output:
+  = @problem.demo_output
+%p
+  %b Input:
+  = @problem.input
+%p
+  %b Output:
+  = @problem.output
+
+= link_to 'Edit', edit_problem_path(@problem)
+\|
+= link_to 'Back', problems_path

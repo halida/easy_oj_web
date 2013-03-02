@@ -1,0 +1,27 @@
+%p#notice= notice
+
+%p
+  %b User:
+  = @solution.user_id
+%p
+  %b Problem:
+  = @solution.problem_id
+%p
+  %b Text:
+  = @solution.text
+%p
+  %b Language:
+  = @solution.language
+%p
+  %b Token:
+  = @solution.token
+%p
+  %b Status:
+  = @solution.status
+%p
+  %b Result:
+  = @solution.result
+
+= link_to 'Edit', edit_solution_path(@solution)
+\|
+= link_to 'Back', solutions_path

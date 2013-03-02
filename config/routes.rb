@@ -1,4 +1,13 @@
 EasyOjWeb::Application.routes.draw do
+  resources :solutions
+
+
+  resources :problems
+
+
+  resources :challenges
+
+
   devise_for :users
 
   # The priority is based upon order of creation:
