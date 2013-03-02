@@ -1,12 +1,12 @@
 EasyOjWeb::Application.routes.draw do
-  resources :solutions
 
+  root :to => 'challenges#index'
+
+  resources :solutions
 
   resources :problems
 
-
   resources :challenges
-
 
   devise_for :users
 
