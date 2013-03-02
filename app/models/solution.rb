@@ -7,7 +7,7 @@ class Solution < ActiveRecord::Base
   def self.tester_get
     solution = Solution.where(status: nil).first
     return solution unless solution
-    solution.update_attributes(status: 'testing')
+    # solution.update_attributes(status: 'testing')
     solution
   end
 
