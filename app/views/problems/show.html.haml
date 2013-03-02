@@ -28,12 +28,14 @@
   - unless solutions.empty?
     %table
       %tr
+        %th ID
         %th Created At
         %th User
         %th Status
   
       - solutions.each do |solution|
         %tr
+          %td.middle= solution.id
           %td= solution.created_at
           %td= solution.user.email
           %td

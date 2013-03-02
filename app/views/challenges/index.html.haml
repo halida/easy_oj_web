@@ -2,6 +2,7 @@
 
 %table
   %tr
+    %th ID
     %th Name
     %th Desc
     %th User
@@ -11,6 +12,7 @@
 
   - @challenges.each do |challenge|
     %tr
+      %td.middle= challenge.id
       %td= link_to challenge.name, challenge
       %td= challenge.desc
       %td= challenge.user.email

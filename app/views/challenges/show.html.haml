@@ -18,6 +18,7 @@
 
 %table
   %tr
+    %th ID
     %th Name
     %th Desc
     %th Show error
@@ -27,6 +28,7 @@
 
   - @challenge.problems.each do |problem|
     %tr
+      %td.middle= problem.id
       %td= link_to problem.name, [@challenge, problem]
       %td= problem.desc
       %td= problem.show_error
