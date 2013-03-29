@@ -1,3 +1,5 @@
+require 'resque/server'
+
 EasyOjWeb::Application.routes.draw do
 
   root :to => 'challenges#index'
@@ -15,6 +17,10 @@ EasyOjWeb::Application.routes.draw do
   end
 
   devise_for :users
+
+  namespace :sudo do
+    mount Resque::Server.new, at: "/resque"
+  end
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

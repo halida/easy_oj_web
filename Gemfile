@@ -34,6 +34,7 @@ gem "truncate_html", "~> 0.5.4"
 gem 'will_paginate', '~> 3.0.pre2'
 
 gem 'resque'
+gem 'rubypython'
 
 gem 'haml'
 gem 'haml-rails'
