@@ -1,0 +1,14 @@
+# config/application.yml
+defaults: &defaults
+  redis:
+    host: 'localhost'
+    port: 6379
+
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults
+
+production:
+  <<: *defaults
