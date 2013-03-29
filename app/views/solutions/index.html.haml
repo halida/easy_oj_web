@@ -9,8 +9,6 @@
     %th Problem
     %th Language
     %th Status
-    %th
-    %th
 
   - @solutions.each do |solution|
     %tr
@@ -22,6 +20,4 @@
       %td
         = solution_status_display solution.status
         = link_to solution.status, solution
-      %td= link_to 'Edit', edit_solution_path(solution)
-      %td= link_to 'Destroy', solution, :method => :delete, :data => { :confirm => 'Are you sure?' }
 
