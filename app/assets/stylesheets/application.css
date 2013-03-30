@@ -10,5 +10,6 @@
  *
  *= require_self
  *= require "core"
+ *= require rainbow/themes/github.css 
  *= require_tree .
  */
