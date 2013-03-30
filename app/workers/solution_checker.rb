@@ -1,4 +1,3 @@
-require 'rubypython'
 require 'tempfile'
 
 class SolutionChecker
@@ -12,25 +11,33 @@ class SolutionChecker
 
     solution.update_attributes(
                     result: result.to_yaml,
-                    status: 'Accepted',
+                    status: result.status,
                     )
   end
 
   def self.create_temp_file solution
+    data = {
+      code: solution.code,
+      language: solution.language,
+      input: solution.question.input,
+      output: solution.question.output,
+    }
+
     file = Tempfile.new 'solution'
-    file.write(solution.code)
+    file.write(data.to_json)
     file.path
   end
 
   def self.sandbox_run filename
-    return {result: 'ok'}
-    s = self.sandbox.Sandbox(['python', filename])
-    s.run()
-    result = s.probe().rubify
+    result = `#{Rails.root}/../sandbox/sandbox #{filename}`
+    JSON.load result
   end
 
   def sandbox
-    @sandbox ||= RubyPython.import("sandbox")
+    @sandbox ||= begin
+                   RubyPython.start
+                   RubyPython.import("sandbox")
+                 end
   end
 
 end
