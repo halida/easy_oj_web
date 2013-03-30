@@ -1,4 +1,4 @@
-- admin = (@problem.user_id == current_user.id)
+- admin = (user_signed_in? and @problem.user_id == current_user.id)
 
 %h1= @problem.name
   
