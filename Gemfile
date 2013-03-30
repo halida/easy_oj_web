@@ -33,8 +33,10 @@ gem 'jbuilder'
 gem "truncate_html", "~> 0.5.4"
 gem 'will_paginate', '~> 3.0.pre2'
 
-gem 'resque'
-gem 'rubypython'
+gem 'sidekiq'
+gem 'slim'
+# if you require 'sinatra' you get the DSL extended to Object
+gem 'sinatra', '>= 1.3.0', :require => nil
 
 gem 'haml'
 gem 'haml-rails'

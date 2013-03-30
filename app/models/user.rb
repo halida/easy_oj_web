@@ -10,4 +10,8 @@ class User < ActiveRecord::Base
 
   has_many :challenges
   has_many :solutions
+
+  def admin?
+    self.email == 'linjunhalida@gmail.com'
+  end
 end
