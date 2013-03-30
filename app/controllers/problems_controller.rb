@@ -1,5 +1,6 @@
 class ProblemsController < ApplicationController
   before_filter :get_challenge
+  before_filter :auth, only: [:new, :edit, :create, :update]
 
   def index
     @problems = @challenge.problems.order('id asc')
@@ -79,5 +80,9 @@ class ProblemsController < ApplicationController
 
   def postparams
     params[:problem]
+  end
+
+  def auth
+    authorize! :manage, @challenge
   end
 end

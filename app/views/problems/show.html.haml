@@ -1,4 +1,4 @@
-- admin = (user_signed_in? and @problem.user_id == current_user.id)
+- admin = can? :manage, @challenge
 
 %h1= @problem.name
   
@@ -21,7 +21,7 @@
     \|
   = link_to 'Back', challenge_path(@challenge)
 
-- if user_signed_in?
+- if can? :create, Solution
   %h3 Solutions
   %p= link_to 'New Solution', new_solution_path(problem_id: @problem.id)
 

@@ -1,27 +1,5 @@
 class SolutionsController < ApplicationController
-
-  def tester_get
-    @solution = Solution.tester_get
-    return render json: {} unless @solution
-
-    problem = @solution.problem
-    data = {
-      code: @solution.code,
-      language: @solution.language,
-      input: problem.input,
-      output: problem.output,
-      solution_token: @solution.token,
-      time_limit: 3,
-      memory_limit: 2000,
-    }
-    render json: data
-  end
-
-  def tester_set
-    @solution = Solution.find_by_token(params[:solution_token])
-    @solution.update_attributes(status: params[:status], result: params[:result])
-    render json: {result: 'OK'}
-  end
+  before_filter :auth, only: [:new, :create]
 
   def all
     @all = true
@@ -65,10 +43,6 @@ class SolutionsController < ApplicationController
     end
   end
 
-  def edit
-    @solution = Solution.find(params[:id])
-  end
-
   def create
     @problem = Problem.find params[:solution][:problem_id]
     @solution = @problem.solutions.by_user(current_user).new(params[:solution].slice(:code, :language))
@@ -85,13 +59,9 @@ class SolutionsController < ApplicationController
     end
   end
 
-  def destroy
-    @solution = Solution.find(params[:id])
-    @solution.destroy
-
-    respond_to do |format|
-      format.html { redirect_to solutions_url }
-      format.json { head :no_content }
-    end
+  private
+  def auth
+    authorize! :create, Solution
   end
+
 end

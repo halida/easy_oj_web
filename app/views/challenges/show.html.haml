@@ -1,4 +1,4 @@
-- admin = (@challenge.user == current_user)
+- admin = can? :manage, Challenge
 
 %h1= @challenge.name
 

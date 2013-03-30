@@ -1,4 +1,5 @@
 class ChallengesController < ApplicationController
+  load_and_authorize_resource
 
   def index
     @challenges = Challenge.order('id desc')
