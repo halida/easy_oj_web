@@ -12,11 +12,12 @@ p, ol, ul, td {
   line-height: 18px;
 }
 
-pre {
-  background-color: #eee;
-  padding: 10px;
-  font-size: 11px;
-}
+/* commented for Rainbow syntax highlighter --- Larry */
+/*pre {*/
+  /*background-color: #eee;*/
+  /*padding: 10px;*/
+  /*font-size: 11px;*/
+/*}*/
 
 a {
   color: #e4701e;

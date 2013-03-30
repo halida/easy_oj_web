@@ -7,8 +7,8 @@ development:
   adapter: mysql2
   encoding: utf8
   database: easy_oj
-  username: easy_oj
-  password: easy_oj
+  username: root
+  password: admin
   socket: /tmp/mysql.sock
 
 production:
