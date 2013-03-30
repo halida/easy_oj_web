@@ -7,21 +7,30 @@ class Solution < ActiveRecord::Base
   LANGUAGES = ['C', 'Java', 'Python']
 
   validates :language, inclusion: LANGUAGES
+  
+  state_machine :status, :initial => :pending do
+    state :testing  # the solution is now testing by SolutionCheck Worker
+    state :tested   # SolutionCheck Worker run the solution and the result is given 
+
+    event :start_test do
+      transition :pending => :testing
+    end
+
+    event :finish_test do
+      transition :testing => :tested
+    end
+  end
 
   def self.tester_get
-    solution = Solution.where(status: nil).first
+    solution = Solution.with_status(:pending).first
     return solution unless solution
-    solution.update_attributes(status: 'Testing')
+    solution.start_test
     solution
   end
 
   def token
     generate_token if not self[:token]
     self[:token]
-  end
-
-  def status
-    self[:status] || "Pending"
   end
 
   private

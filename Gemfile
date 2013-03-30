@@ -32,6 +32,7 @@ gem 'cache_digests'
 gem 'jbuilder'
 gem "truncate_html", "~> 0.5.4"
 gem 'will_paginate', '~> 3.0.pre2'
+gem 'state_machine'
 
 gem 'sidekiq'
 gem 'slim'
@@ -62,4 +63,12 @@ group :development, :test do
   gem 'rspec'
   gem 'rspec-rails', "~> 2.6"
   gem 'sextant'
+end
+
+group :development do
+  gem "binding_of_caller"
+  gem "better_errors"
+  gem 'pry'
+  gem 'pry-rails'
+  gem 'pry-nav'
 end
