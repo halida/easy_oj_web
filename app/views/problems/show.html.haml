@@ -1,5 +1,3 @@
-- admin = (@problem.user_id == current_user.id)
-
 %h1= @problem.name
   
 %p
@@ -16,7 +14,7 @@
   %pre= @problem.demo_output
 
 %p
-  - if admin
+  - if user_signed_in? && @problem.user_id == current_user.id
     = link_to 'Edit', edit_challenge_problem_path(@challenge, @problem)
     \|
   = link_to 'Back', challenge_path(@challenge)

@@ -14,10 +14,9 @@
     %tr
       - if @all
         %td= solution.user.email
-      %td= solution.created_at
+      %td= l solution.created_at, :format => :short
       %td= link_to solution.problem.name, [solution.problem.challenge, solution.problem]
       %td= solution.language
       %td
         = solution_status_display solution.status
         = link_to solution.status, solution
-
