@@ -75,7 +75,7 @@ class SolutionsController < ApplicationController
 
     respond_to do |format|
       if @solution.save
-        Resque.enqueue SolutionChecker, @solution.id
+        SolutionChecker.new.perform(@solution.id)
         format.html { redirect_to solutions_path, notice: 'Solution was successfully created.' }
         format.json { render json: @solution, status: :created, location: @solution }
       else

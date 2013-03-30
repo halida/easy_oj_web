@@ -1,10 +1,9 @@
-require 'rubypython'
 require 'tempfile'
 
 class SolutionChecker
-  @queue = self.name.underscore
+  include Sidekiq::Worker
 
-  def self.perform(id)
+  def perform(id)
     solution = Solution.find(id)
 
     filename = self.create_temp_file solution
@@ -12,25 +11,27 @@ class SolutionChecker
 
     solution.update_attributes(
                     result: result.to_yaml,
-                    status: 'Accepted',
+                    status: result['result'],
                     )
   end
 
-  def self.create_temp_file solution
+  def create_temp_file solution
+    data = {
+      code: solution.code,
+      language: solution.language,
+      input: solution.problem.input,
+      output: solution.problem.output,
+    }
+
     file = Tempfile.new 'solution'
-    file.write(solution.code)
+    file.write(data.to_json)
     file.path
   end
 
-  def self.sandbox_run filename
-    return {result: 'ok'}
-    s = self.sandbox.Sandbox(['python', filename])
-    s.run()
-    result = s.probe().rubify
-  end
-
-  def sandbox
-    @sandbox ||= RubyPython.import("sandbox")
+  def sandbox_run filename
+    return {'result' => 'Accepted'}
+    result = `#{Rails.root}/../sandbox/sandbox #{filename}`
+    JSON.load result
   end
 
 end

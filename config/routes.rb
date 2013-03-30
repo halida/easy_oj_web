@@ -1,4 +1,16 @@
-require 'resque/server'
+require 'sidekiq/web'
+
+def route_can? p, o
+  lambda do |req|
+    (u = req.env['warden'].user) and u.present? and Ability.new(u).can?(p, o)
+  end
+end
+
+def admin?
+  lambda do |req|
+    u = req.env['warden'].user and u.admin?
+  end
+end
 
 EasyOjWeb::Application.routes.draw do
 
@@ -18,8 +30,8 @@ EasyOjWeb::Application.routes.draw do
 
   devise_for :users
 
-  namespace :sudo do
-    mount Resque::Server.new, at: "/resque"
+  namespace :sudo, constraints: admin? do
+    mount Sidekiq::Web => '/sidekiq'
   end
 
   # The priority is based upon order of creation:
