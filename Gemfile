@@ -32,6 +32,7 @@ gem 'cache_digests'
 gem 'jbuilder'
 gem "truncate_html", "~> 0.5.4"
 gem 'will_paginate', '~> 3.0.pre2'
+gem 'state_machine'
 
 gem 'sidekiq'
 gem 'slim'
